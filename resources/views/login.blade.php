@@ -3,8 +3,8 @@
 
 <head>
     <!-- The order in which link rel is defined for both is very important. -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Asif-Tanvir-2006/connect2k25@main/public/css/login.css">
-    <link href="{{ asset('css/login.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Asif-Tanvir-2006/connect_renewed@main/public/css/login.css">
+    <!-- <link href="{{ asset('css/login.css') }}" rel="stylesheet"> -->
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
