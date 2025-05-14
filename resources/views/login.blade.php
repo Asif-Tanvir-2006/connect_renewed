@@ -3,7 +3,8 @@
 
 <head>
     <!-- The order in which link rel is defined for both is very important. -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Asif-Tanvir-2006/connect_renewed@main/public/css/login.css">
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/Asif-Tanvir-2006/connect_renewed@main/public/css/login.css">
     <!-- <link href="{{ asset('css/login.css') }}" rel="stylesheet"> -->
 
     <meta charset="UTF-8">
@@ -18,16 +19,20 @@
         </div>
         <div class="box">
             <div class="wrapper">
-                <div class="caption">Username</div>
-                <div class="upper">
-                    <input type="text" name="" id="">
-                </div>
-                <div class="caption">Password</div>
-                <div class="lower">
-                    <input type="text" name="" id="">
-                </div>
-                <button>Sign In</button>
-                <div class="cap">Not Registered Yet? <a href="signup"> Sign Up</a></div>
+                <form method="POST" action="/loginvalidate">
+                    @csrf
+                    <div class="caption">G-Suite Id</div>
+                    <div class="upper">
+                        <input type="text" name="email" id="">
+                    </div>
+                    <div class="caption">Password</div>
+                    <div class="lower">
+                        <input type="text" name="password" id="">
+                    </div>
+                    <button>Sign In</button>
+                    <div class="cap">Not Registered Yet? <a href="signup"> Sign Up</a></div>
+
+                </form>
             </div>
 
         </div>
