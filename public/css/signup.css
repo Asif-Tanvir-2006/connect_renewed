@@ -48,7 +48,9 @@ button{
     /* height: 5px; */
     border-radius: 20px;
     font-size: 17px;
-    background-color: #006239;
+    background-color: #22d3ee;
+    font-weight: bold;
+    color: black;
 }
 .cap{
     margin-top: 25px;
