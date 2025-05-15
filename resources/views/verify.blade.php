@@ -1,18 +1,36 @@
 <!-- verify.blade.php -->
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/Asif-Tanvir-2006/connect_renewed@main/public/css/verify.css">
+    <link href="{{ asset('css/verify.css') }}" rel="stylesheet">
+
     <meta charset="UTF-8">
     <title>Verify OTP</title>
 </head>
+
 <body>
-    <h2>Enter OTP</h2>
-    <form action="{{ url('/register/verify-otp') }}" method="POST">
-        @csrf
-        <input type="hidden" name="email" value="{{ $email }}">
-        <label for="otp">OTP:</label>
-        <input type="text" name="otp" required>
-        <button type="submit">Verify</button>
-    </form>
+    <div class="view">
+        <div class="padder">
+        </div>
+        <div class="box">
+            <div class="wrapper">
+                <div class="caption">
+                    <h3>Enter your OTP</h3>
+                </div>
+                <form action="{{ url('/register/verify-otp') }}" method="POST">
+                    @csrf
+                    <input type="hidden" name="email" value="{{ $email }}">
+                    <div class="lower"><input type="text" name="otp" required></div>
+
+                    <button type="submit">Verify</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    </div>
 </body>
+
 </html>

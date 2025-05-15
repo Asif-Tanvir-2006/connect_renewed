@@ -13,7 +13,7 @@
 }
 .view .box{
     width: min(90vw, 400px);
-    height: min(110vw, 400px);
+    height: min(100vw, 300px);
     background-color: rgba(256,256,256, 0.1);
     margin: auto;
     border-radius: 15px;
@@ -25,12 +25,13 @@
     padding-top: min(10vw, 50px);
 }
 .padder{
-    height: calc((100vh - min(90vw, 400px)) / 2);
+    height: calc((100vh - min(90vw, 300px)) / 2);
 }
 .caption{
     padding: 20px  0px;
-    padding-bottom: 10px;
+    padding-bottom: 20px;
     padding-left: 10px;
+
 }
 input{
     all: unset;
@@ -38,6 +39,7 @@ input{
     padding-left: 20px;
     border-radius: 20px;
     background-color: rgba(256,256,256, 0.1);
+    /* width: 100%; */
 }
 button{
     all: unset;
