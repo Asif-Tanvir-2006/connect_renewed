@@ -1,30 +1,90 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Support\Facades\Hash;
-use App\Models\CustomTable;
+
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use App\Models\CustomTable;
+use Illuminate\Support\Facades\Http;
+
 class CustomTableController extends Controller
 {
-    public function store(Request $request)
+    public function sendOtp(Request $request)
     {
-        // Validate the incoming request
         $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:custom_table,email',
+            'name'     => 'required|string|max:255',
+            'email'    => 'required|email|unique:custom_table,email',
             'password' => 'required|string|min:8',
         ]);
 
-        // Create a new record in the custom_table
-        $data = CustomTable::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
+        // Generate a 6-digit OTP
+        $otp = rand(100000, 999999);
+
+        // Cache user data temporarily (10 minutes)
+        $key = 'otp_' . $request->email;
+        Cache::put($key, [
+            'otp'      => $otp,
+            'name'     => $request->name,
+            'email'    => $request->email,
+            'password' => $request->password,
+        ], now()->addMinutes(10));
+
+        // Send email using Brevo API
+        $apiKey = env('BREVO_API_KEY');
+
+        $response = Http::withHeaders([
+            'accept' => 'application/json',
+            'api-key' => $apiKey,
+            'content-type' => 'application/json',
+        ])->post('https://api.brevo.com/v3/smtp/email', [
+            'sender' => [
+                'name'  => 'ConnectTeam',
+                'email' => 'asiftanvir2006@gmail.com',
+            ],
+            'to' => [
+                ['email' => $request->email],
+            ],
+            'subject' => 'Your OTP for Connect Signup',
+            'htmlContent' => "<html><body><h1>Your OTP is: <strong>{$otp}</strong></h1></body></html>",
         ]);
 
-        // Return a response
-        return response()->json(['message' => 'Data saved successfully!', 'data' => $data]);
+        if ($response->failed()) {
+            return response()->json(['error' => 'Failed to send OTP email.'], 500);
+        }
+
+        return view('verify', ['email' => $request->email]);
+    }
+
+    public function verifyOtp(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email',
+            'otp' => 'required|digits:6',
+        ]);
+
+        $cached = Cache::get('otp_' . $request->email);
+
+        if (!$cached) {
+            return response()->json(['message' => 'OTP expired or not found.'], 422);
+        }
+
+        if ($cached['otp'] == $request->otp) {
+            // OTP is correct → save to DB
+            $user = CustomTable::create([
+                'name' => $cached['name'],
+                'email' => $cached['email'],
+                'password' => Hash::make($cached['password']),
+            ]);
+
+            // Clear OTP
+            Cache::forget('otp_' . $request->email);
+
+            return response()->json(['message' => 'Email verified and user registered!', 'user' => $user]);
+        }
+
+        return response()->json(['message' => 'Invalid OTP.'], 400);
     }
 
     public function login(Request $request)
@@ -37,12 +97,10 @@ class CustomTableController extends Controller
         $user = CustomTable::where('email', $request->email)->first();
 
         if ($user && Hash::check($request->password, $user->password)) {
-            // Log the user in (using session)
-            session(['user_id' => $user->id]); // or Auth::login($user) if you set up guards
-            return response()->json(['message' => 'logged in  successfully!']);
+            session(['user_id' => $user->id]);
+            return response()->json(['message' => 'Logged in successfully!']);
         }
 
-        return response()->json(['message' => 'Does not exist or data mismatch']);
-
+        return response()->json(['message' => 'Invalid credentials.']);
     }
 }

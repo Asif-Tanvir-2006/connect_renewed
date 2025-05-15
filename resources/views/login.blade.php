@@ -19,7 +19,7 @@
         </div>
         <div class="box">
             <div class="wrapper">
-                <form method="POST" action="/loginvalidate">
+                <form method="POST" action="/login">
                     @csrf
                     <div class="caption">G-Suite Id</div>
                     <div class="upper">

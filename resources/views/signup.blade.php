@@ -17,7 +17,7 @@
         <div class="box">
             <div class="wrapper">
 
-                <form action="{{ url('/custom-table') }}" method="POST">
+            <form action="{{ url('/register/send-otp') }}" method="POST">
                     @csrf
 
                     <div class="caption">Username</div>
