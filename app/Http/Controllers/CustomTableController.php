@@ -13,11 +13,22 @@ class CustomTableController extends Controller
 {
     public function sendOtp(Request $request)
     {
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'name'     => 'required|string|max:255',
-            'email'    => 'required|email|unique:custom_table,email',
+            'email'    => [
+                'required',
+                'email',
+                'unique:custom_table,email',
+                'regex:/^[\w\.-]+@students\.iiests.ac\.in$/'
+            ],
             'password' => 'required|string|min:8',
         ]);
+    
+        if ($validator->fails()) {
+            return redirect()->back()
+                             ->withErrors($validator)
+                             ->withInput();
+        }
 
         // Generate a 6-digit OTP
         $otp = rand(100000, 999999);
