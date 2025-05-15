@@ -3,8 +3,8 @@
 
 <head>
     <link rel="stylesheet"
-        href="https://cdn.jsdelivr.net/gh/Asif-Tanvir-2006/connect_renewed@main/public/css/signup.css">
-    <link href="{{ asset('css/signup.css') }}" rel="stylesheet">
+        href="https://cdn.statically.io/gh/Asif-Tanvir-2006/connect_renewed/main/public/css/signup.css">
+    <!-- <link href="{{ asset('css/signup.css') }}" rel="stylesheet"> -->
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
