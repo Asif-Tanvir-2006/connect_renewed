@@ -588,7 +588,11 @@ class ComposerStaticInit88970a0117c062eed55fa8728fc43833
     );
 
     public static $classMap = array (
+        'App\\Http\\Controllers\\AuthController' => __DIR__ . '/../..' . '/app/Http/Controllers/AuthController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
+        'App\\Http\\Controllers\\CustomTableController' => __DIR__ . '/../..' . '/app/Http/Controllers/CustomTableController.php',
+        'App\\Http\\Controllers\\TestMail' => __DIR__ . '/../..' . '/app/Http/Controllers/TestMail.php',
+        'App\\Models\\CustomTable' => __DIR__ . '/../..' . '/app/Models/CustomTable.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
