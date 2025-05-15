@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MikeHawk</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -39,7 +38,10 @@
         }
     </script>
     <style>
-        
+        html{
+            max-width: 100vw;
+            overflow-x: hidden;
+        }
         .blob {
             position: absolute;
             width: 500px;
@@ -153,12 +155,14 @@
             text-shadow: 0 0 10px rgba(34, 211, 238, 0.7);
         }
     </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 </head>
 <body class="bg-dark-900 text-gray-200 overflow-hidden relative min-h-screen">
     <!-- Loading Screen -->
     <div id="loadingScreen" class="loading-screen">
         <div class="loading-spinner mb-4"></div>
-        <p class="text-cyan-400 font-mono text-lg mt-4">Initializing Lenda...</p>
+        <p class="text-cyan-400 font-mono text-lg mt-4">Initializing...</p>
     </div>
     
     <!-- Grid Background Pattern -->
@@ -178,7 +182,7 @@
                         <!-- <div class="w-8 h-8 rounded-full bg-cyan-500 flex items-center justify-center mr-2">
                             <i class="fas fa-atom text-dark-900 text-lg"></i>
                         </div> -->
-                        <span class="text-cyan-400 font-bold text-xl font-mono">TUNG TUNG TUNG SAHUR</span>
+                        <span class="text-cyan-400 font-bold text-xl font-mono">INTROXX 2k25</span>
                     </div>
                 </div>
                 
@@ -235,10 +239,10 @@
             <div class="flex flex-col lg:flex-row items-center justify-between">
                 <div class="lg:w-1/2 mb-12 lg:mb-0">
                     <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 leading-tight">
-                        <span class="text-cyan-400 glow-text">Elevate</span> Your Digital Experience
+                        <span class="text-cyan-400 glow-text">Connect</span> With Your Peers!
                     </h1>
                     <p class="text-lg text-gray-400 mb-8 max-w-lg">
-                        Alkane Panda brings you the most advanced platform with cutting-edge technology. Experience the future today with our seamless integration and powerful features.
+                      Connect and get to know your peers in a whole new way. Introxx is designed to help you build meaningful connections and enhance your experience at IIEST.
                     </p>
                     <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
                         <a href="/signup" class="btn-cyber px-6 py-3 rounded-md bg-cyan-500 text-dark-900 font-medium hover:bg-cyan-400 transition-colors duration-300 text-lg">
@@ -249,17 +253,12 @@
                         </a>
                     </div>
                     <div class="mt-8 flex items-center space-x-6">
-                        <div class="flex -space-x-2">
-                            <img class="w-10 h-10 rounded-full border-2 border-dark-800" src="https://randomuser.me/api/portraits/women/12.jpg" alt="User 1">
-                            <img class="w-10 h-10 rounded-full border-2 border-dark-800" src="https://randomuser.me/api/portraits/men/32.jpg" alt="User 2">
-                            <img class="w-10 h-10 rounded-full border-2 border-dark-800" src="https://randomuser.me/api/portraits/women/45.jpg" alt="User 3">
-                        </div>
+                       
                         <div>
-                            <p class="text-gray-400 text-sm">Join <span class="text-cyan-400 font-medium">10,000+</span> happy users</p>
+                            <p class="text-gray-400 text-sm">Join <span class="text-cyan-400 font-medium">INTROXX</span> today!</p>
                             <div class="flex items-center">
-                                <i class="fas fa-star text-yellow-400 mr-1"></i>
-                                <span class="text-gray-300 font-medium">4.9</span>
-                                <span class="text-gray-500 text-sm ml-1">(1,200 reviews)</span>
+                                
+                                <span class="text-gray-300 font-medium">IIEST, Shibpur</span>
                             </div>
                         </div>
                     </div>
@@ -276,12 +275,12 @@
                                 <div class="text-xs text-gray-400 ml-4">dashboard.js</div>
                             </div>
                             <div class="p-4 font-mono text-sm">
-                                <div class="text-cyan-400 mb-2">// Welcome to Lenda Dashboard</div>
+                                <div class="text-cyan-400 mb-2">// Welcome to Introxx Dashboard</div>
                                 <div class="text-purple-400">const</div> <span class="text-cyan-400">features</span> = [<br>
-                                &nbsp;&nbsp;{ <span class="text-green-400">"name"</span>: <span class="text-yellow-400">"Real-time Analytics"</span> },<br>
-                                &nbsp;&nbsp;{ <span class="text-green-400">"name"</span>: <span class="text-yellow-400">"Secure Encryption"</span> },<br>
-                                &nbsp;&nbsp;{ <span class="text-green-400">"name"</span>: <span class="text-yellow-400">"AI Integration"</span> },<br>
-                                &nbsp;&nbsp;{ <span class="text-green-400">"name"</span>: <span class="text-yellow-400">"Custom Workflows"</span> }<br>
+                                &nbsp;&nbsp;{ <span class="text-green-400">"Discover"</span>: <span class="text-yellow-400">"new people with same interests as yours"</span> },<br>
+                                &nbsp;&nbsp;{ <span class="text-green-400">"Connect"</span>: <span class="text-yellow-400">"with your seniors"</span> },<br>
+                                &nbsp;&nbsp;{ <span class="text-green-400">"Grow"</span>: <span class="text-yellow-400">"your network"</span> },<br>
+                                &nbsp;&nbsp;{ <span class="text-green-400">"Explore"</span>: <span class="text-yellow-400">"life, JEE is over"</span> }<br>
                                 ];
                             </div>
                         </div>
