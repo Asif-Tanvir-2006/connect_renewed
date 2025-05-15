@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use App\Models\CustomTable;
 use Illuminate\Support\Facades\Http;
+use IIumainate\Support\Facades\Validator;
 
 class CustomTableController extends Controller
 {
