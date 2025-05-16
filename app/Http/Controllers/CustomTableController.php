@@ -16,21 +16,32 @@ class CustomTableController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name'     => 'required|string|max:255',
-            'email'    => [
-                'required',
-                'email',
-                'unique:custom_table,email',
-                'regex:/^[\w\.-]+@students\.iiests.ac\.in$/'
-            ],
+            'email'    => 'required|email|unique:custom_table,email',
             'password' => 'required|string|min:8',
         ]);
-    
+        //'regex:/^[\w\.-]+@students\.iiests.ac\.in$/'
         if ($validator->fails()) {
-            return redirect()->back()
+            /*return redirect()->back()
                              ->withErrors($validator)
-                             ->withInput();
+                             ->withInput();*/
+            return json_encode(["error"=>"request vaidation"]);
         }
+        $dat = $request->all();
+        $x = $dat["email"];
+        $pathVar = env('PYTHON_SERVER_PATH');
+        $email_valid_response = Http::get("$pathVar?email=$x");
+        $data = $email_valid_response->json();
 
+        if($data["email"]=="exist"){
+            //do shit
+        }
+        else if($data["email"]=="not exist"){
+            return json_encode(["email"=>"not exist"]);
+        }
+        else{
+            return json_encode(["email"=>"api end point not working as intended"]);
+        }
+        
         // Generate a 6-digit OTP
         $otp = rand(100000, 999999);
 
