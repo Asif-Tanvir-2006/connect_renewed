@@ -15,7 +15,7 @@ class CustomTableController extends Controller
 {
     public function sendOtp(Request $request)
     {
-        $ip = $request->ip();
+        $ip = explode(',', $request->header('X-Forwarded-For'))[0] ?? $request->ip();
         $cacheKey = 'signup_attempts_' . $ip;
 
         // Check if IP is blocked
