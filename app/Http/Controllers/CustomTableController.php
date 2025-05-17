@@ -46,21 +46,21 @@ class CustomTableController extends Controller
             return json_encode(["error" => "request vaidation"]);
         }
         // well this shit failed badly
-        // $dat = $request->all();
-        // $x = $dat["email"];
-        // $pathVar = env('PYTHON_SERVER_PATH');
-        // $email_valid_response = Http::get("$pathVar?email=$x");
-        // $data = $email_valid_response->json();
+        $dat = $request->all();
+        $x = $dat["email"];
+        $pathVar = env('PYTHON_SERVER_PATH');
+        $email_valid_response = Http::get("$pathVar?email=$x");
+        $data = $email_valid_response->json();
 
-        // if($data["email"]=="exist"){
-        //     //do shit
-        // }
-        // else if($data["email"]=="not exist"){
-        //     return json_encode(["email"=>"not exist"]);
-        // }
-        // else{
-        //     return json_encode(["email"=>"api end point not working as intended"]);
-        // }
+        if($data["email"]=="exist"){
+             //do shit
+        }
+        else if($data["email"]=="not exist"){
+            return json_encode(["email"=>"not exist"]);
+        }
+        else{
+             return json_encode(["email"=>"api end point not working as intended"]);
+        }
 
 
         // Generate a 6-digit OTP
