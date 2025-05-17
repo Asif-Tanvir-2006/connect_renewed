@@ -35,7 +35,12 @@ class CustomTableController extends Controller
 
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:custom_table,email|regex:/^2025[a-z][a-z][a-z]\d\d\d+@students\.iiests.ac\.in$/',
+            'email' => [
+                'required',
+                'email',
+                'unique:custom_table,email',
+                'regex:/^2024[a-z]{3}\d{3}\.[a-z]+@students\.iiests\.ac\.in$/'
+            ],
             'password' => 'required|string|min:8',
         ]);
         // 'regex:/^[\w\.-]+@students\.iiests.ac\.in$/'
@@ -52,14 +57,12 @@ class CustomTableController extends Controller
         $email_valid_response = Http::get("$pathVar?email=$x");
         $data = $email_valid_response->json();
 
-        if($data["email"]=="exist"){
-             //do shit
-        }
-        else if($data["email"]=="not exist"){
-            return json_encode(["email"=>"not exist"]);
-        }
-        else{
-             return json_encode(["email"=>"api end point not working as intended"]);
+        if ($data["email"] == "exist") {
+            //do shit
+        } else if ($data["email"] == "not exist") {
+            return json_encode(["email" => "not exist"]);
+        } else {
+            return json_encode(["email" => "api end point not working as intended"]);
         }
 
 
