@@ -9,48 +9,69 @@ use Illuminate\Support\Facades\Mail;
 use App\Models\CustomTable;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Validator;
-
+use Illuminate\Support\Facades\RateLimiter;
+use Illuminate\Support\Str;
 class CustomTableController extends Controller
 {
     public function sendOtp(Request $request)
     {
+        $ip = $request->ip();
+        $cacheKey = 'signup_attempts_' . $ip;
+
+        // Check if IP is blocked
+        if (Cache::has("blocked_ip_$ip")) {
+            return response()->json(['message' => 'Too many attempts. Try again in 24 hours.'], 429);
+        }
+
+        // Track attempts
+        $attempts = Cache::get($cacheKey, 0);
+        if ($attempts >= 5) {
+            Cache::put("blocked_ip_$ip", true, now()->addDay()); // Block for 1 day
+            Cache::forget($cacheKey); // Reset count after blocking
+            return response()->json(['message' => 'Too many attempts. You are blocked for 24 hours.'], 429);
+        }
+
+        Cache::put($cacheKey, $attempts + 1, now()->addDay());
+
         $validator = Validator::make($request->all(), [
-            'name'     => 'required|string|max:255',
-            'email'    => 'required|email|unique:custom_table,email',
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:custom_table,email',
             'password' => 'required|string|min:8',
         ]);
-        //'regex:/^[\w\.-]+@students\.iiests.ac\.in$/'
+        // 'regex:/^[\w\.-]+@students\.iiests.ac\.in$/'
         if ($validator->fails()) {
             /*return redirect()->back()
                              ->withErrors($validator)
                              ->withInput();*/
-            return json_encode(["error"=>"request vaidation"]);
+            return json_encode(["error" => "request vaidation"]);
         }
-        $dat = $request->all();
-        $x = $dat["email"];
-        $pathVar = env('PYTHON_SERVER_PATH');
-        $email_valid_response = Http::get("$pathVar?email=$x");
-        $data = $email_valid_response->json();
+        // well this shit failed badly
+        // $dat = $request->all();
+        // $x = $dat["email"];
+        // $pathVar = env('PYTHON_SERVER_PATH');
+        // $email_valid_response = Http::get("$pathVar?email=$x");
+        // $data = $email_valid_response->json();
 
-        if($data["email"]=="exist"){
-            //do shit
-        }
-        else if($data["email"]=="not exist"){
-            return json_encode(["email"=>"not exist"]);
-        }
-        else{
-            return json_encode(["email"=>"api end point not working as intended"]);
-        }
-        
+        // if($data["email"]=="exist"){
+        //     //do shit
+        // }
+        // else if($data["email"]=="not exist"){
+        //     return json_encode(["email"=>"not exist"]);
+        // }
+        // else{
+        //     return json_encode(["email"=>"api end point not working as intended"]);
+        // }
+
+
         // Generate a 6-digit OTP
         $otp = rand(100000, 999999);
 
         // Cache user data temporarily (10 minutes)
         $key = 'otp_' . $request->email;
         Cache::put($key, [
-            'otp'      => $otp,
-            'name'     => $request->name,
-            'email'    => $request->email,
+            'otp' => $otp,
+            'name' => $request->name,
+            'email' => $request->email,
             'password' => $request->password,
         ], now()->addMinutes(10));
 
@@ -62,16 +83,16 @@ class CustomTableController extends Controller
             'api-key' => $apiKey,
             'content-type' => 'application/json',
         ])->post('https://api.brevo.com/v3/smtp/email', [
-            'sender' => [
-                'name'  => 'ConnectTeam',
-                'email' => 'asiftanvir2006@gmail.com',
-            ],
-            'to' => [
-                ['email' => $request->email],
-            ],
-            'subject' => 'Your OTP for Connect Signup',
-            'htmlContent' => "<html><body><h1>Your OTP is: <strong>{$otp}</strong></h1></body></html>",
-        ]);
+                    'sender' => [
+                        'name' => 'Introxx',
+                        'email' => 'asiftanvir2006@gmail.com',
+                    ],
+                    'to' => [
+                        ['email' => $request->email],
+                    ],
+                    'subject' => 'Your OTP for Connect Signup',
+                    'htmlContent' => "<html><body><h3>Your OTP is: <strong>{$otp}</strong><br>Please don't share it with others. <br>It is valid for 10 minutes only.</h3></body></html>",
+                ]);
 
         if ($response->failed()) {
             return response()->json(['error' => 'Failed to send OTP email.'], 500);

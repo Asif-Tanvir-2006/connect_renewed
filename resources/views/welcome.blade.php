@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>MikeHawk</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Monoton&family=Notable&family=Podkova:wght@400..800&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
             darkMode: 'class',
@@ -38,9 +40,19 @@
         }
     </script>
     <style>
-        html{
+        @import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+
+        html {
             max-width: 100vw;
             overflow-x: hidden;
+        }
+        
+      
+       
+        .Ub_font {
+            font-family: 'Monoton';
+            font-weight: 900;
+            font-size: 22px;
         }
         .blob {
             position: absolute;
@@ -51,29 +63,29 @@
             border-radius: 50%;
             z-index: -1;
         }
-        
+
         .blob-1 {
             top: -150px;
             left: -150px;
         }
-        
+
         .blob-2 {
             bottom: -150px;
             right: -150px;
         }
-        
+
         .card-glass {
             background: rgba(26, 26, 26, 0.7);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(34, 211, 238, 0.1);
         }
-        
+
         .btn-cyber {
             position: relative;
             overflow: hidden;
             transition: all 0.3s ease;
         }
-        
+
         .btn-cyber::before {
             content: '';
             position: absolute;
@@ -84,11 +96,11 @@
             background: linear-gradient(90deg, transparent, rgba(34, 211, 238, 0.4), transparent);
             transition: all 0.7s ease;
         }
-        
+
         .btn-cyber:hover::before {
             left: 100%;
         }
-        
+
         .nav-link::after {
             content: '';
             position: absolute;
@@ -99,11 +111,11 @@
             background-color: #22d3ee;
             transition: width 0.3s ease;
         }
-        
+
         .nav-link:hover::after {
             width: 100%;
         }
-        
+
         .loading-screen {
             position: fixed;
             top: 0;
@@ -118,7 +130,7 @@
             z-index: 9999;
             transition: opacity 0.5s ease-out;
         }
-        
+
         .loading-spinner {
             width: 50px;
             height: 50px;
@@ -127,30 +139,35 @@
             border-radius: 50%;
             animation: spin 1s linear infinite;
         }
-        
+
         @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
         }
-        
+
         .grid-pattern {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: 
+            background-image:
                 linear-gradient(rgba(34, 211, 238, 0.05) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(34, 211, 238, 0.05) 1px, transparent 1px);
             background-size: 30px 30px;
             z-index: -1;
         }
-        
+
         .feature-card:hover {
             transform: translateY(-10px);
             box-shadow: 0 20px 25px -5px rgba(6, 182, 212, 0.1), 0 10px 10px -5px rgba(6, 182, 212, 0.04);
         }
-        
+
         .glow-text {
             text-shadow: 0 0 10px rgba(34, 211, 238, 0.7);
         }
@@ -158,20 +175,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 </head>
+
 <body class="bg-dark-900 text-gray-200 overflow-hidden relative min-h-screen">
     <!-- Loading Screen -->
     <div id="loadingScreen" class="loading-screen">
         <div class="loading-spinner mb-4"></div>
         <p class="text-cyan-400 font-mono text-lg mt-4">Initializing...</p>
     </div>
-    
+
     <!-- Grid Background Pattern -->
     <div class="grid-pattern"></div>
-    
+
     <!-- Blob Background Elements -->
     <div class="blob blob-1"></div>
     <div class="blob blob-2"></div>
-    
+
     <!-- Navbar -->
     <nav class="backdrop-blur-md   fixed w-full z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -182,53 +200,64 @@
                         <!-- <div class="w-8 h-8 rounded-full bg-cyan-500 flex items-center justify-center mr-2">
                             <i class="fas fa-atom text-dark-900 text-lg"></i>
                         </div> -->
-                        <span class="text-cyan-400 font-bold text-xl font-mono">INTROXX 2k25</span>
+                        <span class="text-cyan-400 Ub_font">INTRO <span style="margin-left: -5px">XX</span> <span style="margin-left: 5px;">2K25</span></span>
                     </div>
                 </div>
-                
+
                 <!-- Desktop Menu -->
                 <div class="hidden md:block">
                     <div class="ml-10 flex items-baseline space-x-8">
-                        <a href="#" class="nav-link relative px-3 py-2 text-sm font-medium text-gray-300 hover:text-cyan-400 transition-colors duration-300">Home</a>
-                        <a href="#" class="nav-link relative px-3 py-2 text-sm font-medium text-gray-300 hover:text-cyan-400 transition-colors duration-300">About</a>
-                        
+                        <a href="#"
+                            class="nav-link relative px-3 py-2 text-sm font-medium text-gray-300 hover:text-cyan-400 transition-colors duration-300">Home</a>
+                        <a href="#"
+                            class="nav-link relative px-3 py-2 text-sm font-medium text-gray-300 hover:text-cyan-400 transition-colors duration-300">About</a>
+
                     </div>
                 </div>
-                
+
                 <!-- Auth Buttons -->
                 <div class="hidden md:block">
                     <div class="ml-4 flex items-center md:ml-6 space-x-4">
-                        <a href="/login" class="px-4 py-2 rounded-md text-cyan-400 border border-cyan-400 hover:bg-cyan-400/10 transition-colors duration-300 font-medium">Login</a>
-                        <a href="/signup" class="btn-cyber px-4 py-2 rounded-md bg-cyan-500 text-dark-900 font-medium hover:bg-cyan-400 transition-colors duration-300">Sign Up</a>
+                        <a href="/login"
+                            class="px-4 py-2 rounded-md text-cyan-400 border border-cyan-400 hover:bg-cyan-400/10 transition-colors duration-300 font-medium">Login</a>
+                        <a href="/signup"
+                            class="btn-cyber px-4 py-2 rounded-md bg-cyan-500 text-dark-900 font-medium hover:bg-cyan-400 transition-colors duration-300">Sign
+                            Up</a>
                     </div>
                 </div>
-                
+
                 <!-- Mobile menu button -->
                 <div class="md:hidden flex items-center">
                     <button id="mobileMenuButton" class="text-gray-300 hover:text-cyan-400 focus:outline-none">
                         <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16M4 18h16"></path>
                         </svg>
                     </button>
                 </div>
             </div>
         </div>
-        
+
         <!-- Mobile Menu -->
         <div id="mobileMenu" class="md:hidden hidden bg-dark-800 border-t border-dark-700">
             <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-cyan-400 hover:bg-dark-700">Home</a>
-                <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-cyan-400 hover:bg-dark-700">About</a>
-                
+                <a href="#"
+                    class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-cyan-400 hover:bg-dark-700">Home</a>
+                <a href="#"
+                    class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-cyan-400 hover:bg-dark-700">About</a>
+
                 <div class="pt-2 space-y-2">
-                    <button class="w-full px-3 py-2 rounded-md text-center text-cyan-400 border border-cyan-400 hover:bg-cyan-400/10">Login</button>
-                    <button class="w-full px-3 py-2 rounded-md text-center bg-cyan-500 text-dark-900 font-medium hover:bg-cyan-400">Sign Up</button>
+                    <button
+                        class="w-full px-3 py-2 rounded-md text-center text-cyan-400 border border-cyan-400 hover:bg-cyan-400/10">Login</button>
+                    <button
+                        class="w-full px-3 py-2 rounded-md text-center bg-cyan-500 text-dark-900 font-medium hover:bg-cyan-400">Sign
+                        Up</button>
                 </div>
             </div>
         </div>
     </nav>
-    
-    
+
+
     <!-- Main Content -->
     <main class="pt-24 pb-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
         <div style="margin-top: 5em;"></div>
@@ -240,22 +269,26 @@
                         <span class="text-cyan-400 glow-text">Connect</span> With Your Peers!
                     </h1>
                     <p class="text-lg text-gray-400 mb-8 max-w-lg">
-                      Connect and get to know your peers in a whole new way. Introxx is designed to help you build meaningful connections and enhance your experience at IIEST.
+                        Connect and get to know your peers in a whole new way. Introxx is designed to help you build
+                        meaningful connections and enhance your experience at IIEST.
                     </p>
                     <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-                        <a href="/signup" class="btn-cyber px-6 py-3 rounded-md bg-cyan-500 text-dark-900 font-medium hover:bg-cyan-400 transition-colors duration-300 text-lg">
+                        <a href="/signup"
+                            class="btn-cyber px-6 py-3 rounded-md bg-cyan-500 text-dark-900 font-medium hover:bg-cyan-400 transition-colors duration-300 text-lg">
                             Get Started <i class="fas fa-arrow-right ml-2"></i>
                         </a>
-                        <a href="#" class="px-6 py-3 rounded-md text-cyan-400 border border-cyan-400 hover:bg-cyan-400/10 transition-colors duration-300 font-medium text-lg">
+                        <a href="#"
+                            class="px-6 py-3 rounded-md text-cyan-400 border border-cyan-400 hover:bg-cyan-400/10 transition-colors duration-300 font-medium text-lg">
                             Learn More
                         </a>
                     </div>
                     <div class="mt-8 flex items-center space-x-6">
-                       
+
                         <div>
-                            <p class="text-gray-400 text-sm">Join <span class="text-cyan-400 font-medium">INTROXX</span> today!</p>
+                            <p class="text-gray-400 text-sm">Join <span class="text-cyan-400 font-medium">INTROXX</span>
+                                today!</p>
                             <div class="flex items-center">
-                                
+
                                 <span class="text-gray-300 font-medium">IIEST, Shibpur</span>
                             </div>
                         </div>
@@ -274,11 +307,16 @@
                             </div>
                             <div class="p-4 font-mono text-sm">
                                 <div class="text-cyan-400 mb-2">// Welcome to Introxx Dashboard</div>
-                                <div class="text-purple-400">const</div> <span class="text-cyan-400">features</span> = [<br>
-                                &nbsp;&nbsp;{ <span class="text-green-400">"Discover"</span>: <span class="text-yellow-400">"new people with same interests as yours"</span> },<br>
-                                &nbsp;&nbsp;{ <span class="text-green-400">"Connect"</span>: <span class="text-yellow-400">"with your seniors"</span> },<br>
-                                &nbsp;&nbsp;{ <span class="text-green-400">"Grow"</span>: <span class="text-yellow-400">"your network"</span> },<br>
-                                &nbsp;&nbsp;{ <span class="text-green-400">"Explore"</span>: <span class="text-yellow-400">"life, JEE is over"</span> }<br>
+                                <div class="text-purple-400">const</div> <span class="text-cyan-400">features</span> =
+                                [<br>
+                                &nbsp;&nbsp;{ <span class="text-green-400">"Discover"</span>: <span
+                                    class="text-yellow-400">"new people with same interests as yours"</span> },<br>
+                                &nbsp;&nbsp;{ <span class="text-green-400">"Connect"</span>: <span
+                                    class="text-yellow-400">"with your seniors"</span> },<br>
+                                &nbsp;&nbsp;{ <span class="text-green-400">"Grow"</span>: <span
+                                    class="text-yellow-400">"your network"</span> },<br>
+                                &nbsp;&nbsp;{ <span class="text-green-400">"Explore"</span>: <span
+                                    class="text-yellow-400">"life, JEE is over"</span> }<br>
                                 ];
                             </div>
                         </div>
@@ -288,49 +326,50 @@
                 </div>
             </div>
         </section>
-        
- 
-    
-    
-    <script>
-        // Loading screen animation
-        window.addEventListener('load', function() {
-            setTimeout(function() {
-                const loadingScreen = document.getElementById('loadingScreen');
-                loadingScreen.style.opacity = '0';
-                setTimeout(function() {
-                    loadingScreen.style.display = 'none';
-                }, 500);
-            }, 1500);
-        });
-        
-        // Mobile menu toggle
-        const mobileMenuButton = document.getElementById('mobileMenuButton');
-        const mobileMenu = document.getElementById('mobileMenu');
-        
-        mobileMenuButton.addEventListener('click', function() {
-            mobileMenu.classList.toggle('hidden');
-        });
-        
-        // Add floating animation to elements
-        document.addEventListener('DOMContentLoaded', function() {
-            const elements = document.querySelectorAll('.animate-float');
-            elements.forEach((el, index) => {
-                // Apply different animation delays
-                el.style.animationDelay = `${index * 0.2}s`;
+
+
+
+
+        <script>
+            // Loading screen animation
+            window.addEventListener('load', function () {
+                setTimeout(function () {
+                    const loadingScreen = document.getElementById('loadingScreen');
+                    loadingScreen.style.opacity = '0';
+                    setTimeout(function () {
+                        loadingScreen.style.display = 'none';
+                    }, 500);
+                }, 1500);
             });
-        });
-        
-        // Button hover effect enhancement
-        const cyberButtons = document.querySelectorAll('.btn-cyber');
-        cyberButtons.forEach(button => {
-            button.addEventListener('mouseenter', function() {
-                this.style.boxShadow = '0 0 15px rgba(34, 211, 238, 0.5)';
+
+            // Mobile menu toggle
+            const mobileMenuButton = document.getElementById('mobileMenuButton');
+            const mobileMenu = document.getElementById('mobileMenu');
+
+            mobileMenuButton.addEventListener('click', function () {
+                mobileMenu.classList.toggle('hidden');
             });
-            button.addEventListener('mouseleave', function() {
-                this.style.boxShadow = 'none';
+
+            // Add floating animation to elements
+            document.addEventListener('DOMContentLoaded', function () {
+                const elements = document.querySelectorAll('.animate-float');
+                elements.forEach((el, index) => {
+                    // Apply different animation delays
+                    el.style.animationDelay = `${index * 0.2}s`;
+                });
             });
-        });
-    </script>
+
+            // Button hover effect enhancement
+            const cyberButtons = document.querySelectorAll('.btn-cyber');
+            cyberButtons.forEach(button => {
+                button.addEventListener('mouseenter', function () {
+                    this.style.boxShadow = '0 0 15px rgba(34, 211, 238, 0.5)';
+                });
+                button.addEventListener('mouseleave', function () {
+                    this.style.boxShadow = 'none';
+                });
+            });
+        </script>
 </body>
-</html> 
+
+</html>
