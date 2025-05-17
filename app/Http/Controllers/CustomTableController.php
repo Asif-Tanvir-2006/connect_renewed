@@ -35,7 +35,7 @@ class CustomTableController extends Controller
 
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:custom_table,email',
+            'email' => 'required|email|unique:custom_table,email|regex:/^2025[a-z][a-z][a-z]\d\d\d+@students\.iiests.ac\.in$/',
             'password' => 'required|string|min:8',
         ]);
         // 'regex:/^[\w\.-]+@students\.iiests.ac\.in$/'
