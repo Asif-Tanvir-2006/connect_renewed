@@ -52,14 +52,16 @@
         <div class="box">
             <div class="wrapper">
                 <div class="caption">
-                    <h3>Enter your OTP</h3>
+                    <h3>Set new password</h3>
                 </div>
-                <form action="{{ url('/register/verify-otp') }}" method="POST">
+                <form action="{{ url('/register/setnewpwd') }}" method="POST">
                     @csrf
-                    <input type="hidden" name="email" value="{{ $email }}">
-                    <div class="lower"><input type="text" name="otp" required></div>
+                    <input type="hidden" name="email" value="{{ request()->query('email') }}">
+                    <input type="hidden" name="token" value="{{ request()->query('token') }}">
 
-                    <button>Verify</button>
+                    <div class="lower"><input type="text" name="newPwd" required></div>
+
+                    <button>Confirm</button>
                 </form>
             </div>
         </div>

@@ -11,8 +11,127 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Str;
+use Laravel\Pail\ValueObjects\Origin\Console;
 class CustomTableController extends Controller
 {
+    public function showResetPwdForm(Request $request)
+    {
+        
+        $email = $request->query('email');
+        $token = $request->query('token');
+        if (!$email || !$token) {
+            return abort(403, 'Unauthorized access.');
+        }
+        $cacheKey = 'resetPwd_' . $email;
+        $cached = Cache::get($cacheKey);
+        if (!$cached) {
+            return json_encode(["error" => "token expired"]);
+        }
+        
+        if($cached['token'] == $token){
+            return view('setpwd', ['token' => $token, 'email' => $email]);
+            
+        }
+        return response()->json(['message' => 'Invalid token.'], 400);
+    }
+    public function setPwd(Request $request)
+    {
+        $dat = $request->all();
+        $mail = $dat["email"];
+        $token = $dat["token"];
+        $password = $dat["newPwd"];
+        $validator = Validator::make($request->all(), [
+            'newPwd' => 'required|string|min:8',
+        ]);
+        if ($validator->fails()) {
+            return json_encode(["error" => "request vaidation"]);
+        }
+        $cacheKey = 'resetPwd_' . $mail;
+        $cached = Cache::get($cacheKey);
+
+        if (!$cached) {
+            return json_encode(["error" => "token expired"]);
+        }
+        if ($cached['token'] == $token) {
+            // OTP is correct → save to DB
+            $user = CustomTable::where('email', $mail)->first();
+            if ($user) {
+                $user->password = Hash::make($password);
+                $user->save();
+                Cache::forget($cacheKey);
+                return response()->json(['message' => 'Password updated successfully!']);
+            } else {
+                return json_encode(["error" => "user not found"]);
+            }
+        }
+        Cache::forget($cacheKey);
+
+        return response()->json(['message' => 'Invalid token.'], 400);
+    }
+    public function forgotPwd(Request $request)
+    {
+        $dat = $request->all();
+        $mail = $dat["email"];
+        $validator = Validator::make($request->all(), [
+            'email' => [
+                'required',
+                'email',
+                'regex:/^2024[a-z]{3}\d{3}\.[a-z]+@students\.iiests\.ac\.in$/'
+
+            ],
+        ]);
+        if ($validator->fails()) {
+            return json_encode(["error" => "request vaidation"]);
+        }
+        $user = CustomTable::where('email', $mail)->first();
+        if(!$user) {
+            return json_encode(["error" => "user not found"]);
+        }
+        $token = Str::random(64);
+        $resetLink = "https://connect-renewed.vercel.app/setpwd?token=$token&email=$mail";
+
+        // $pathVar = env('PYTHON_SERVER_PATH');
+        // $email_valid_response = Http::get("$pathVar?email=$mail");
+        // $data = $email_valid_response->json();
+
+        // if ($data["email"] == "exist") {
+        //     //do shit
+        // } else if ($data["email"] == "not exist") {
+        //     return json_encode(["email" => "not exist"]);
+        // } else {
+        //     return json_encode(["email" => "api end point not working as intended"]);
+        // }
+        // return response()->json('The random token is: ' . $token);
+        $cacheKey = 'resetPwd_' . $mail;
+        Cache::put($cacheKey, [
+            // 'email' => $mail,
+            'token' => $token,
+        ], now()->addMinutes(10));
+       
+        $apiKey = env('BREVO_API_KEY');
+
+        $response = Http::withHeaders([
+            'accept' => 'application/json',
+            'api-key' => $apiKey,
+            'content-type' => 'application/json',
+        ])->post('https://api.brevo.com/v3/smtp/email', [
+                    'sender' => [
+                        'name' => 'Introxx',
+                        'email' => 'asiftanvir2006@gmail.com',
+                    ],
+                    'to' => [
+                        ['email' => $mail],
+                    ],
+                    'subject' => 'Your Password reset link',
+                    'htmlContent' => "<html><body><h3>Follow this link to reset password: <br> <a href=\"{$resetLink}\" style=\"color: #1a73e8; text-decoration: underline;\">{$resetLink}</a><br>Please don't share it with others. <br>It is valid for 10 minutes only.</h3></body></html>",
+                ]);
+
+        if ($response->failed()) {
+            return response()->json(['error' => 'Failed to send OTP email.'], 500);
+        }
+        return response()->json(['message' => 'Password reset link sent to your email!']);
+
+    }
     public function sendOtp(Request $request)
     {
         $ip = explode(',', $request->header('X-Forwarded-For'))[0] ?? $request->ip();

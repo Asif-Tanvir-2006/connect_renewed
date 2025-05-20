@@ -91,7 +91,7 @@
                         <input type="password" name="password" required>
                     </div>
 
-                    <button type="submit">Sign Up</button>
+                    <button>Sign Up</button>
                 </form>
 
                 <div class="cap">Already Registered? <a href="/login"> Sign In</a></div>
@@ -99,5 +99,45 @@
         </div>
     </div>
 </body>
+<script>
+    // Loading screen animation
+    window.addEventListener('load', function () {
+        setTimeout(function () {
+            const loadingScreen = document.getElementById('loadingScreen');
+            loadingScreen.style.opacity = '0';
+            setTimeout(function () {
+                loadingScreen.style.display = 'none';
+            }, 500);
+        }, 1500);
+    });
+
+    // Mobile menu toggle
+    const mobileMenuButton = document.getElementById('mobileMenuButton');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    mobileMenuButton.addEventListener('click', function () {
+        mobileMenu.classList.toggle('hidden');
+    });
+
+    // Add floating animation to elements
+    document.addEventListener('DOMContentLoaded', function () {
+        const elements = document.querySelectorAll('.animate-float');
+        elements.forEach((el, index) => {
+            // Apply different animation delays
+            el.style.animationDelay = `${index * 0.2}s`;
+        });
+    });
+
+    // Button hover effect enhancement
+    const cyberButtons = document.querySelectorAll('.btn-cyber');
+    cyberButtons.forEach(button => {
+        button.addEventListener('mouseenter', function () {
+            this.style.boxShadow = '0 0 15px rgba(34, 211, 238, 0.5)';
+        });
+        button.addEventListener('mouseleave', function () {
+            this.style.boxShadow = 'none';
+        });
+    });
+</script>
 
 </html>

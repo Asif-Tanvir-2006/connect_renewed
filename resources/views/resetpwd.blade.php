@@ -13,7 +13,7 @@
 </head>
 
 <body>
-        <div class="grid-pattern"></div>
+    <div class="grid-pattern"></div>
 
     <!-- Blob Background Elements -->
     <div class="blob blob-1"></div>
@@ -21,16 +21,16 @@
 
     <nav class="backdrop-blur-md   fixed w-full z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-           
-
-                <!-- Desktop Menu -->
-              
 
 
+            <!-- Desktop Menu -->
 
-                <!-- Mobile menu button -->
-                
-            </div>
+
+
+
+            <!-- Mobile menu button -->
+
+        </div>
         </div>
 
         <!-- Mobile Menu -->
@@ -41,7 +41,7 @@
 
                 <a href="#"
                     class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-cyan-400 hover:bg-dark-700">About</a>
-               
+
             </div>
         </div>
     </nav>
@@ -51,15 +51,17 @@
         </div>
         <div class="box">
             <div class="wrapper">
-                <div class="caption">
-                    <h3>Enter your OTP</h3>
-                </div>
-                <form action="{{ url('/register/verify-otp') }}" method="POST">
+
+                <form action="{{ url('/register/forgotpwd') }}" method="POST">
                     @csrf
-                    <input type="hidden" name="email" value="{{ $email }}">
-                    <div class="lower"><input type="text" name="otp" required></div>
+                    <div class="caption">
+                        <h3>G-Suite ID</h3>
+                    </div>
+                    <div class="lower"><input type="text" name="email" required></div>
+                    
 
                     <button>Verify</button>
+                    <!-- <h4 style="color: grey; font-size: 15px; margin-top:20px; text-align: center;"></h4> -->
                 </form>
             </div>
         </div>

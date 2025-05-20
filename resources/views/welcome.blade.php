@@ -6,7 +6,9 @@
     <title>MikeHawk</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Monoton&family=Notable&family=Podkova:wght@400..800&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Monoton&family=Notable&family=Podkova:wght@400..800&display=swap"
+        rel="stylesheet">
     <script>
         tailwind.config = {
             darkMode: 'class',
@@ -46,14 +48,84 @@
             max-width: 100vw;
             overflow-x: hidden;
         }
-        
-      
-       
+
+        .sidenav {
+            height: 100vh;
+            /* 100% Full-height */
+            width: 0;
+            /* 0 width - change this with JavaScript */
+            position: fixed;
+            /* Stay in place */
+            z-index: 1;
+            /* Stay on top */
+            top: 0;
+            /* Stay at the top */
+            left: 0;
+            /* border: 1px solid cyan; */
+            background-color: rgba(26, 26, 26, 0.9);
+            backdrop-filter: blur(7px);
+            /* filter: blur(2px); */
+            /* Black*/
+            overflow-x: hidden;
+            /* Disable horizontal scroll */
+            padding-top: 60px;
+            /* Place content 60px from the top */
+            transition: 0.5s;
+            /* 0.5 second transition effect to slide in the sidenav */
+        }
+
+        /* The navigation menu links */
+        .sidenav a {
+            padding: 8px 8px 8px 32px;
+            text-decoration: none;
+            font-size: 25px;
+            /* color: cyan; */
+            /* color: #818181; */
+            /* color: cyan; */
+            color: #f1f1f1;
+            display: block;
+            transition: 0.3s;
+        }
+
+        /* When you mouse over the navigation links, change their color */
+        .sidenav a:hover {
+            /* color: #f1f1f1; */
+            color: cyan;
+        }
+
+        /* Position and style the close button (top right corner) */
+        .sidenav .closebtn {
+            position: absolute;
+            top: 0;
+            right: 25px;
+            font-size: 36px;
+            margin-left: 50px;
+        }
+
+        /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+        #main {
+            transition: margin-left .5s;
+            padding: 20px;
+        }
+
+        /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+        @media screen and (max-height: 450px) {
+            .sidenav {
+                padding-top: 15px;
+            }
+
+            .sidenav a {
+                font-size: 18px;
+            }
+        }
+
+
         .Ub_font {
             font-family: 'Monoton';
             font-weight: 900;
             font-size: 22px;
         }
+
         .blob {
             position: absolute;
             width: 500px;
@@ -200,7 +272,8 @@
                         <!-- <div class="w-8 h-8 rounded-full bg-cyan-500 flex items-center justify-center mr-2">
                             <i class="fas fa-atom text-dark-900 text-lg"></i>
                         </div> -->
-                        <span class="text-cyan-400 Ub_font">INTRO <span style="margin-left: -5px">XX</span> <span style="margin-left: 5px;">2K25</span></span>
+                        <span class="text-cyan-400 Ub_font">INTRO <span style="margin-left: -5px">XX</span> <span
+                                style="margin-left: 5px;">2K25</span></span>
                     </div>
                 </div>
 
@@ -228,32 +301,25 @@
 
                 <!-- Mobile menu button -->
                 <div class="md:hidden flex items-center">
-                    <button id="mobileMenuButton" class="text-gray-300 hover:text-cyan-400 focus:outline-none">
-                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M4 6h16M4 12h16M4 18h16"></path>
-                        </svg>
-                    </button>
+                    <span onclick="openNav()"><button id="mobileMenuButton"
+                            class="text-gray-300 hover:text-cyan-400 focus:outline-none">
+                            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M4 6h16M4 12h16M4 18h16"></path>
+                            </svg>
+                        </button></span>
                 </div>
             </div>
         </div>
 
         <!-- Mobile Menu -->
-        <div id="mobileMenu" class="md:hidden hidden bg-dark-800 border-t border-dark-700">
-            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                <a href="#"
-                    class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-cyan-400 hover:bg-dark-700">Home</a>
-                <a href="#"
-                    class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-cyan-400 hover:bg-dark-700">About</a>
-
-                <div class="pt-2 space-y-2">
-                    <button
-                        class="w-full px-3 py-2 rounded-md text-center text-cyan-400 border border-cyan-400 hover:bg-cyan-400/10">Login</button>
-                    <button
-                        class="w-full px-3 py-2 rounded-md text-center bg-cyan-500 text-dark-900 font-medium hover:bg-cyan-400">Sign
-                        Up</button>
-                </div>
-            </div>
+        <div id="mySidenav" class="sidenav">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+            <div style="border: 1px solid cyan; margin-top:10px; margin-bottom: 20px;"></div>
+            <a href="#">About</a>
+            <a href="#">Services</a>
+            <a href="#">Clients</a>
+            <a href="#">Contact</a>
         </div>
     </nav>
 
@@ -284,7 +350,7 @@
                     </div>
                     <div class="mt-8 flex items-center space-x-6">
 
-                        <div>
+                        <div style="padding-left: 5px;">
                             <p class="text-gray-400 text-sm">Join <span class="text-cyan-400 font-medium">INTROXX</span>
                                 today!</p>
                             <div class="flex items-center">
@@ -343,12 +409,12 @@
             });
 
             // Mobile menu toggle
-            const mobileMenuButton = document.getElementById('mobileMenuButton');
-            const mobileMenu = document.getElementById('mobileMenu');
+            // const mobileMenuButton = document.getElementById('mobileMenuButton');
+            // const mobileMenu = document.getElementById('mobileMenu');
 
-            mobileMenuButton.addEventListener('click', function () {
-                mobileMenu.classList.toggle('hidden');
-            });
+            // mobileMenuButton.addEventListener('click', function () {
+            //     mobileMenu.classList.toggle('hidden');
+            // });
 
             // Add floating animation to elements
             document.addEventListener('DOMContentLoaded', function () {
@@ -369,6 +435,14 @@
                     this.style.boxShadow = 'none';
                 });
             });
+            function openNav() {
+                document.getElementById("mySidenav").style.width = "100vw";
+            }
+
+            /* Set the width of the side navigation to 0 */
+            function closeNav() {
+                document.getElementById("mySidenav").style.width = "0";
+            } 
         </script>
 </body>
 
