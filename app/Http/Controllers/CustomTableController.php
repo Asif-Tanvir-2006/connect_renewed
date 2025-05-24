@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Cookie;
 use Laravel\Pail\ValueObjects\Origin\Console;
 class CustomTableController extends Controller
 {
@@ -264,9 +265,18 @@ class CustomTableController extends Controller
 
         if ($user && Hash::check($request->password, $user->password)) {
             session(['user_id' => $user->id]);
+            //make the cookie
+
+            //sets a cookie with an expiration of 60 minutes
+            //tested using TestLoginController and /login-test route
+            Cookie::queue('UIDstr',(strval($user->id)),60);
             return response()->json(['message' => 'Logged in successfully!']);
         }
 
         return response()->json(['message' => 'Invalid credentials.']);
+    }
+    public function logoutCookie(Request $request){
+        Cookie::queue(Cookie::forget('UIDstr'));
+        return response()->json(['cookie'=>"deleted"]);
     }
 }

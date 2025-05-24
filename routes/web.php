@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CustomTableController;
 use App\Http\Controllers\TestMail;
+use App\Http\Controllers\TestLoginController;
 Route::get('/', function () {
     return view('welcome');
 });
@@ -27,3 +28,7 @@ Route::get('/send-test-mail', [TestMail::class, 'sendMail']);
 Route::post('/register/send-otp', [CustomTableController::class, 'sendOtp']);
 Route::post('/register/verify-otp', [CustomTableController::class, 'verifyOtp']);
 Route::post('/login', [CustomTableController::class, 'login']);
+
+//Route only for testing remove-later
+Route::get('/login-test',[TestLoginController::class,'testLogin']);
+Route::get('/logout',[CustomTableController::class,'logoutCookie']);
